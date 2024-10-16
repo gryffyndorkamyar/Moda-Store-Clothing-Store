@@ -1,0 +1,119 @@
+{% extends "base2.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<main class="main cart rtl text-right">
+    <div class="page-content pt-7 pb-10">
+        <div class="step-by pr-4 pl-4">
+            <h3 class="title title-simple title-step active"><a href="cart.html"> سبد خرید</a></h3>
+            
+        </div>
+        <div class="container mt-7 mb-2">
+            <div class="row">
+                <div class="col-lg-8 col-md-12 pr-lg-4">
+                    <table class="shop-table cart-table">
+                        <thead>
+                            <tr>
+                                <th><span>محصول</span></th>
+                                <th><span> نام محصول</span></th>
+                                <th><span> قیمت واحد</span></th>
+                                <th><span>تعداد</span></th>
+                                <th><span>سایز</span></th>
+                                <th>قیمت کل</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for item in cart %}
+
+                            <tr>
+                                <td class="product-thumbnail">
+                                    <figure>
+                                        <a href="{% url "detailbag" item.product.id %}">
+                                            <img src="{{ item.product.productimage.url }}" width="100" height="100" alt="product">
+                                        </a>
+                                    </figure>
+                                </td>
+
+                                <td class="product-name">
+                                    <div class="product-name-section">
+                                        <a href="{% url "detailbag" item.product.id %}">{{ item.product.productname }}</a>
+                                    </div>
+                                </td>
+
+                                <td class="product-subtotal">
+                                    <span class="amount">{{ item.product.price|intcomma }} تومان</span>
+                                </td>
+
+                                <td class="product-quantity">
+                                    <div class="input-group">
+                                        
+                                        <p class="">{{ item.quantity }}</p>
+                                        
+                                    </div>
+                                </td>
+
+                                <td class="product-size">
+                                    <span class="size">{{ item.size }}</span>
+                                </td>
+
+                                <td class="product-price">
+                                    <span class="amount pt-3">{{ item.total_price|intcomma }} </span>
+                                </td>
+
+                                <td class="product-close">
+                                    <a href="{% url "cart:cart_remove" item.product.id %}" class="product-remove" title="حذف محصول">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                    <div class="cart-actions mb-6 pt-4">
+                        <a href="{% url "listing" %}" class="btn btn-dark btn-md btn-rounded btn-icon-left ml-4 mb-4">
+                            ادامه خرید<i class="d-icon-arrow-left"></i>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+                <aside class="col-lg-4 sticky-sidebar-wrapper">
+                    <div class="sticky-sidebar" data-sticky-options="{'bottom': 20}">
+                        <div class="summary mb-4">
+                            
+                            <table class="shipping">
+                                <tbody><tr class="summary-subtotal">
+                                    
+                                    
+                                </tr>
+
+                               
+                            </tbody></table>
+
+                            
+                            <table class="total">
+                                <tbody><tr class="summary-subtotal">
+                                    <td>
+                                        <h4 class="summary-subtitle"> جمع کل</h4>
+                                    </td>
+                                    <td>
+                                        <p class="summary-total-price ls-s">{{ cart.get_total_price|intcomma }} تومان</p>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                            <a href="checkout.html" class="btn btn-dark btn-rounded btn-checkout">
+                                صورت حساب
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</main> 
+
+{% endblock content %}

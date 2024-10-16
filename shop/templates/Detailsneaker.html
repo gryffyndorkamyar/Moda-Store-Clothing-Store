@@ -1,0 +1,110 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+{% for item in detailsneaker %}
+
+<form method="post" action="{% url "cart:cart_add" item.id %}">
+{% csrf_token %}
+<main class="main mt-6 single-product rtl text-right">
+    <div class="page-content mb-10 pb-6">
+        <div class="container">
+            <div class="product product-single row mb-2">
+                <div class="col-md-6">
+                    <div class="product-gallery pg-vertical product-gallery-sticky">
+                        
+                        
+                        <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1 ltr">
+
+                            <figure class="product-image">
+                                <img src="{{ item.productimage.url }}"
+                                data-zoom-image="{{ item.productimage.url }}"
+                                alt="لباس جین آبی" width="800" height="900"
+                                style="background-color: #f2f3f5;" />
+                            </figure>
+
+                        </div>
+
+                        
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="product-details rtl">
+                        <div class="product-navigation">
+                            <ul class="breadcrumb breadcrumb-lg">
+                                <li><a href="demo2.html"><i class="d-icon-home"></i></a></li>
+                                <li><a href="#" class="active">محصول</a></li>
+                                <li>دمو محصول 2</li>
+                            </ul>
+                            
+                        </div>
+                        <h1 class="product-name">{{ item.productname }}</h1>
+                        <div class="product-meta">
+                            کد کالا:<span class="product-sku">456-987</span>
+                            برند:<span class="product-brand">{{ item.productname }}</span>
+                        </div>
+                        <div class="product-price mb-2">{{ item.price|intcomma }} تومان</div>
+                        <div class="ratings-container">
+                            <div class="ratings-full">
+                                <span class="ratings" style="width:80%"></span>
+                                <span class="tooltiptext tooltip-top"></span>
+                            </div>
+                            <a href="#product-tab-reviews" class="link-to-tab rating-reviews">( از 16نظر )</a>
+                        </div>
+                        <p class="product-short-desc">
+                            {{ item.description }}
+                        </p>
+                        <hr class="product-divider">
+                        <div class="product-form product-qty">
+                            <div class="product-form-group">
+                                <div class="input-group ml-2">
+                                    <button type="button" class="quantity-minus d-icon-minus"></button>
+                                    <input name="quantity" value="{{ last_quantity }}" class="quantity form-control" type="number" max="30">
+                                    <button type="button" class="quantity-plus d-icon-plus"></button>
+                                </div>
+
+                                <button type="submit" class="btn-product btn-cart text-normal ls-normal font-weight-semi-bold">افزودن به سبد خرید</button>
+                            </div>
+                        </div>
+
+                        <select name="size" class="form-control" aria-label="Default select example">
+                            <option selected>Please Choose Your Size</option>
+                            <option value="s" {% if last_size == 's' %}selected{% endif %} >s</option>
+                            <option value="m" {% if last_size == 'm' %}selected{% endif %}>m</option>
+                            <option value="l" {% if last_size == 'l' %}selected{% endif %}>l</option>
+                            <option value="xl" {% if last_size == 'xl' %}selected{% endif %}>xl</option>
+                        
+                        </select>
+
+                        <hr class="product-divider mb-3">
+                        <div class="product-footer">
+                            <div class="social-links ml-4">
+                                <a href="#" class="social-link social-facebook fab fa-facebook-f"></a>
+                                <a href="#" class="social-link social-twitter fab fa-twitter"></a>
+                                <a href="#" class="social-link social-pinterest fab fa-pinterest-p"></a>
+                            </div>
+                            <span class="divider d-lg-show"></span>
+                            <div class="product-action">
+                                
+                                <a href="#" class="btn-product btn-compare"><i class="d-icon-compare"></i>
+                                    مقایسه ها</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</main>
+<!-- End Main -->
+
+</form>
+
+{% endfor %}
+
+
+
+{% endblock %}
