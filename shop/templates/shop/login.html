@@ -1,0 +1,31 @@
+{% extends 'base2.html' %}
+{% block content %}
+ <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    
+                    <p class=" text-center text-white-50 p-3 text_login">صفحه لاگین</p>
+                </div>
+            </div>
+        </header>
+    <br><br>
+<div class = "container">
+<div class = "row">
+    <center>
+        <div class="col-10">
+           <form method="post" action={% url 'login' %}>
+               {% csrf_token %}
+  <div class="mb-3">
+    <input type="text" class="form-control" name="username" placeholder="Please Enter Your UserName" >
+  </div>
+  <div class="mb-3">
+    <input type="password" class="form-control" name="password" placeholder="Please Enter Your Password">
+  </div>
+  <button type="submit" class="btn btn-primary">ورود</button>
+</form>
+        </div>
+    </center>
+</div>
+</div>
+    <br><br>
+{% endblock %}
